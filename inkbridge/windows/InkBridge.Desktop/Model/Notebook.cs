@@ -157,26 +157,37 @@ public static class NotebookJson
             sb.Append(",\"tpl\":"); Str(sb, p.Template);
             sb.Append(",\"w\":"); Num(sb, p.W);
             sb.Append(",\"h\":"); Num(sb, p.H);
-            sb.Append(",\"strokes\":[");
-            for (int j = 0; j < p.Strokes.Count; j++)
-            {
-                var s = p.Strokes[j];
-                if (j > 0) sb.Append(',');
-                sb.Append("{\"id\":"); Str(sb, s.Id);
-                sb.Append(",\"k\":").Append(s.Kind == StrokeKind.Highlighter ? "\"hl\"" : "\"pen\"");
-                sb.Append(",\"c\":").Append(unchecked((int)s.Color));
-                sb.Append(",\"w\":"); Num(sb, s.Width);
-                sb.Append(",\"pts\":[");
-                for (int k = 0; k < s.Pts.Count; k++)
-                {
-                    if (k > 0) sb.Append(',');
-                    Num(sb, s.Pts[k], k % 3 == 2 ? 3 : 2);
-                }
-                sb.Append("]}");
-            }
-            sb.Append("]}");
+            sb.Append(",\"strokes\":");
+            WriteStrokes(sb, p.Strokes);
+            sb.Append('}');
         }
         sb.Append("]}");
         return sb.ToString();
+    }
+
+    public static void WriteStrokes(StringBuilder sb, IReadOnlyList<Stroke> strokes)
+    {
+        sb.Append('[');
+        for (int j = 0; j < strokes.Count; j++)
+        {
+            if (j > 0) sb.Append(',');
+            WriteStroke(sb, strokes[j]);
+        }
+        sb.Append(']');
+    }
+
+    public static void WriteStroke(StringBuilder sb, Stroke s)
+    {
+        sb.Append("{\"id\":"); Str(sb, s.Id);
+        sb.Append(",\"k\":").Append(s.Kind == StrokeKind.Highlighter ? "\"hl\"" : "\"pen\"");
+        sb.Append(",\"c\":").Append(unchecked((int)s.Color));
+        sb.Append(",\"w\":"); Num(sb, s.Width);
+        sb.Append(",\"pts\":[");
+        for (int k = 0; k < s.Pts.Count; k++)
+        {
+            if (k > 0) sb.Append(',');
+            Num(sb, s.Pts[k], k % 3 == 2 ? 3 : 2);
+        }
+        sb.Append("]}");
     }
 }
