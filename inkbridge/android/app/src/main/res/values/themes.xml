@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.InkBridge" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">#1E3A8A</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#2563EB</item>
+        <item name="colorControlNormal">#1F2937</item>
+        <item name="android:windowBackground">#F3F4F6</item>
+        <item name="android:statusBarColor">#F3F4F6</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

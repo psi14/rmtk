@@ -1,0 +1,51 @@
+name: InkBridge
+
+on:
+  push:
+    paths:
+      - "inkbridge/**"
+      - ".github/workflows/inkbridge.yml"
+  workflow_dispatch:
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: inkbridge/android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Testes e APK
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon testDebugUnitTest assembleRelease
+      - uses: actions/upload-artifact@v4
+        with:
+          name: InkBridge-android
+          path: inkbridge/android/app/build/outputs/apk/release/app-release.apk
+
+  windows:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: inkbridge/windows
+    env:
+      AVALONIA_TELEMETRY_OPTOUT: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Publicar win-x64
+        run: >
+          dotnet publish InkBridge.Desktop -c Release -r win-x64 --self-contained true
+          -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:EnableCompressionInSingleFile=true -p:DebugType=none -o out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: InkBridge-windows-x64
+          path: inkbridge/windows/out/InkBridge.exe

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9FAFB"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingEnd="8dp">
+
+            <ImageButton android:id="@+id/btnBack" style="@style/ToolButton" android:src="@drawable/ic_back" android:contentDescription="Voltar" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="200dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingStart="4dp"
+                android:paddingEnd="8dp"
+                android:textColor="#111827"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <View style="@style/ToolSep" />
+            <ImageButton android:id="@+id/btnPen" style="@style/ToolButton" android:src="@drawable/ic_pen" android:contentDescription="Caneta" />
+            <ImageButton android:id="@+id/btnHighlighter" style="@style/ToolButton" android:src="@drawable/ic_highlighter" android:contentDescription="Marcador" />
+            <ImageButton android:id="@+id/btnEraser" style="@style/ToolButton" android:src="@drawable/ic_eraser" android:contentDescription="Borracha" />
+            <View style="@style/ToolSep" />
+
+            <LinearLayout
+                android:id="@+id/colors"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" />
+
+            <View style="@style/ToolSep" />
+            <TextView
+                android:id="@+id/widthLabel"
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#374151"
+                android:textSize="13sp" />
+            <SeekBar
+                android:id="@+id/widthBar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+            <View style="@style/ToolSep" />
+
+            <ImageButton android:id="@+id/btnUndo" style="@style/ToolButton" android:src="@drawable/ic_undo" android:contentDescription="Desfazer" />
+            <ImageButton android:id="@+id/btnRedo" style="@style/ToolButton" android:src="@drawable/ic_redo" android:contentDescription="Refazer" />
+            <View style="@style/ToolSep" />
+
+            <ImageButton android:id="@+id/btnPrev" style="@style/ToolButton" android:src="@drawable/ic_prev" android:contentDescription="Página anterior" />
+            <TextView
+                android:id="@+id/pageLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="52dp"
+                android:gravity="center"
+                android:textColor="#111827"
+                android:textSize="15sp" />
+            <ImageButton android:id="@+id/btnNext" style="@style/ToolButton" android:src="@drawable/ic_next" android:contentDescription="Página seguinte" />
+            <ImageButton android:id="@+id/btnAddPage" style="@style/ToolButton" android:src="@drawable/ic_add" android:contentDescription="Nova página" />
+            <ImageButton android:id="@+id/btnTemplate" style="@style/ToolButton" android:src="@drawable/ic_template" android:contentDescription="Fundo da página" />
+            <View style="@style/ToolSep" />
+
+            <ImageButton android:id="@+id/btnLink" style="@style/ToolButton" android:src="@drawable/ic_cast" android:contentDescription="Ligação ao PC" />
+            <TextView
+                android:id="@+id/linkStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="180dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="#4B5563"
+                android:textSize="13sp" />
+            <ImageButton android:id="@+id/btnMore" style="@style/ToolButton" android:src="@drawable/ic_more" android:contentDescription="Mais" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D1D5DB" />
+
+    <com.inkbridge.app.ink.InkView
+        android:id="@+id/ink"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>
